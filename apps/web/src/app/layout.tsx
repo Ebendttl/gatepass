@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="h-full bg-zinc-950 text-zinc-100 antialiased">
+    <html lang="en" className="h-full bg-zinc-950 text-zinc-100 antialiased" suppressHydrationWarning>
       <body className="min-h-full flex flex-col font-sans">
         <Providers>
           <Navbar />

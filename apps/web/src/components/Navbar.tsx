@@ -13,9 +13,11 @@ export default function Navbar() {
         
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="bg-gradient-to-tr from-indigo-500 to-purple-500 p-2 rounded-lg text-white group-hover:scale-105 transition-transform">
-            <Ticket className="w-5 h-5" />
-          </div>
+          <img 
+            src="/logo.png" 
+            alt="Gatepass Logo" 
+            className="w-9 h-9 rounded-lg object-cover group-hover:scale-105 border border-zinc-800 transition-all duration-300"
+          />
           <span className="text-xl font-bold bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
             Gatepass
           </span>
