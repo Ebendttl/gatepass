@@ -74,7 +74,7 @@ When ticket purchase demand is heavy (event capacities $\ge$ 1,000):
 
 ### Cryptographic QR Signatures
 - Ticket verification is guaranteed via cryptographically signed QR payloads:
-  $$\text{HMAC-SHA256}(\text{ticket\_id} \mathbin{\Vert} \text{event\_id} \mathbin{\Vert} \text{tier\_id}, \text{SecretKey})$$
+  $$\text{HMAC-SHA256}(\text{Ticket ID} \mathbin{\Vert} \text{Event ID} \mathbin{\Vert} \text{Tier ID}, \text{SecretKey})$$
 - Prevents database forgery and guarantees offline/online validation.
 
 ---

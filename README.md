@@ -104,7 +104,7 @@ High-demand events can overwhelm database connections. To protect DB query pooli
 
 ### 3. Cryptographic QR Verification
 All ticket QR codes are signed on the server to prevent counterfeiting or guessing UUIDs:
-$$\text{Signature} = \text{HMAC-SHA256}(\text{ticket\_id} \mathbin{\Vert} \text{event\_id} \mathbin{\Vert} \text{tier\_id}, \text{HMAC\_QR\_SECRET})$$
+$$\text{Signature} = \text{HMAC-SHA256}(\text{Ticket ID} \mathbin{\Vert} \text{Event ID} \mathbin{\Vert} \text{Tier ID}, \text{HMAC Secret})$$
 
 During verification, the scanning server parses the ticket UUID, recalculates the signature, and matches it against the payload signature. This prevents malicious ticket forging.
 
