@@ -1,0 +1,30 @@
+{
+  "name": "gatepass-api",
+  "version": "1.0.0",
+  "description": "Gatepass Event Ticketing API",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "seed": "node src/seed.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bull": "^4.12.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "nodemailer": "^8.0.10",
+    "pg": "^8.11.5",
+    "qrcode": "^1.5.3",
+    "rate-limit-redis": "^4.2.0",
+    "redis": "^4.6.13",
+    "stripe": "^15.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
