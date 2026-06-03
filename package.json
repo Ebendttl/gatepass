@@ -1,0 +1,19 @@
+{
+  "name": "gatepass-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev --workspace=gatepass-api",
+    "dev:web": "npm run dev --workspace=web",
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+    "start:api": "npm run start --workspace=gatepass-api",
+    "start:web": "npm run start --workspace=web",
+    "seed": "npm run seed --workspace=gatepass-api"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
