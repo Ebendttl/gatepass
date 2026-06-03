@@ -260,7 +260,7 @@ export default function AnalyticsDashboardPage() {
                   />
                   <Line
                     name="Incremental Sales"
-                    type="bar"
+                    type="monotone"
                     dataKey="sales"
                     stroke="#a855f7"
                     strokeWidth={1.5}
