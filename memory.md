@@ -97,3 +97,23 @@ The `apps/api/src/seed.js` script clears the database and populates it with:
 2. **Email Delivery Integrations**: Connect Resend or SendGrid templates to BullMQ email tasks.
 3. **Database Schema Enhancements**: Integrate a migration runner (e.g. `db-migrate` or Prisma) instead of raw `.sql` manual files.
 4. **Offline Scanner Mode**: Implement service workers to cache validation checks for offline events.
+
+---
+
+## 7. Production Deployment & Live Environment
+
+### Cloud Infrastructure (Hybrid Model)
+- **Backend API Service (`apps/api`)**: Deployed on **Render** as a Web Service.
+  - Live API URL: `https://gatepass-api-uuyv.onrender.com`
+  - Environment Configuration: `NODE_ENV=production`, custom JWT/HMAC keys.
+- **Frontend Client (`apps/web`)**: Deployed on **Vercel** pointing to the Render backend via `NEXT_PUBLIC_API_URL`.
+- **Database (Relational)**: Serverless PostgreSQL hosted on **Neon**.
+- **Cache & Queue (Redis)**: Serverless Redis hosted on **Upstash** (configured with secure `rediss://` TLS protocol).
+
+### Key Production Patches
+1. **Dynamic SSL Handling (`apps/api/src/db.js`)**:
+   Adjusted the node-postgres Pool configuration to dynamically request SSL connections (`rejectUnauthorized: false`) for cloud databases (Neon/Render) while allowing unencrypted fallback for local development.
+2. **Cloud-Native Seeding**:
+   Seeded the live Neon database directly in the cloud environment via a temporary Render build pipeline command (`npm run seed && npm start`), bypassing local network port-5432 restrictions.
+3. **Hydration Warning Mitigation (`apps/web/src/app/layout.tsx`)**:
+   Suppressed hydration mismatch prompts triggered by browser wallet extensions by appending `suppressHydrationWarning` to the root `<html>` tag.
