@@ -117,3 +117,7 @@ The `apps/api/src/seed.js` script clears the database and populates it with:
    Seeded the live Neon database directly in the cloud environment via a temporary Render build pipeline command (`npm run seed && npm start`), bypassing local network port-5432 restrictions.
 3. **Hydration Warning Mitigation (`apps/web/src/app/layout.tsx`)**:
    Suppressed hydration mismatch prompts triggered by browser wallet extensions by appending `suppressHydrationWarning` to the root `<html>` tag.
+4. **Vercel Next.js Vulnerability Blocker**:
+   Upgraded Next.js and its dependencies to a secure patched version (`^15.1.12` resolving to `15.5.19`) to bypass Vercel's automated Remote Code Execution (RCE) security checks.
+5. **Monorepo Dependency Consolidation**:
+   Forced root hoisting of `react` and `react-dom` by adding them to the root `package.json` devDependencies and deleted the duplicate `/apps/web/package-lock.json` file. This prevents module resolution collisions between the root and workspaces during production builds.
