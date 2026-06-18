@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Search, Ticket, Calendar, MapPin, CheckCircle2, XCircle, AlertTriangle, ArrowRight } from 'lucide-react';
+import { API_URL } from '@/config';
 
 interface TicketItem {
   id: string;
@@ -22,7 +23,7 @@ export default function TicketLookupPage() {
     queryKey: ['tickets', searchEmail],
     queryFn: async () => {
       if (!searchEmail) return { tickets: [] };
-      const res = await fetch(`http://localhost:5000/api/tickets/buyer?email=${encodeURIComponent(searchEmail.trim())}`);
+      const res = await fetch(`${API_URL}/api/tickets/buyer?email=${encodeURIComponent(searchEmail.trim())}`);
       if (!res.ok) throw new Error('Failed to fetch tickets');
       return res.json();
     },

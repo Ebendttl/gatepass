@@ -5,6 +5,7 @@ import { useAuth } from '@/app/providers';
 import { useRouter } from 'next/navigation';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Calendar, MapPin, Plus, Trash2, ArrowRight, LayoutDashboard, X, BarChart3, Users, DollarSign } from 'lucide-react';
+import { API_URL } from '@/config';
 
 interface Event {
   id: string;
@@ -49,7 +50,7 @@ export default function DashboardPage() {
   const { data, isLoading, error } = useQuery<{ events: Event[] }>({
     queryKey: ['organizer-events'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:5000/api/events/organizer', {
+      const res = await fetch(`${API_URL}/api/events/organizer`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!res.ok) throw new Error('Failed to fetch events');
@@ -63,7 +64,7 @@ export default function DashboardPage() {
   // Create Event Mutation
   const createEventMutation = useMutation({
     mutationFn: async (eventData: any) => {
-      const res = await fetch('http://localhost:5000/api/events', {
+      const res = await fetch(`${API_URL}/api/events`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -93,7 +94,7 @@ export default function DashboardPage() {
   // Cancel Event Mutation
   const cancelEventMutation = useMutation({
     mutationFn: async (eventId: string) => {
-      const res = await fetch(`http://localhost:5000/api/events/${eventId}/cancel`, {
+      const res = await fetch(`${API_URL}/api/events/${eventId}/cancel`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` }
       });

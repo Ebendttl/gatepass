@@ -5,6 +5,7 @@ import { useAuth } from '@/app/providers';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Mail, Lock, UserPlus, ArrowRight, UserCircle2 } from 'lucide-react';
+import { API_URL } from '@/config';
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('');
@@ -26,7 +27,7 @@ export default function RegisterPage() {
     setSubmitting(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/register', {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, role }),

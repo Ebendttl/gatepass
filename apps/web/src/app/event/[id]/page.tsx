@@ -4,6 +4,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { Calendar, MapPin, Ticket, ShieldCheck, Mail, CreditCard, ChevronRight, Users, Clock, AlertCircle } from 'lucide-react';
+import { API_URL } from '@/config';
 
 interface TicketTier {
   id: string;
@@ -57,7 +58,7 @@ export default function EventPage() {
   const { data, isLoading, error } = useQuery<EventDetails>({
     queryKey: ['event', eventId],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/api/events/${eventId}`);
+      const res = await fetch(`${API_URL}/api/events/${eventId}`);
       if (!res.ok) throw new Error('Event not found');
       return res.json();
     },
@@ -74,7 +75,7 @@ export default function EventPage() {
   // 1. Join Queue Mutation
   const joinQueueMutation = useMutation({
     mutationFn: async (buyerEmail: string) => {
-      const res = await fetch('http://localhost:5000/api/queue/join', {
+      const res = await fetch(`${API_URL}/api/queue/join`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ event_id: eventId, email: buyerEmail }),
@@ -96,7 +97,7 @@ export default function EventPage() {
 
     const interval = setInterval(async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/queue/status/${queueToken}`);
+        const res = await fetch(`${API_URL}/api/queue/status/${queueToken}`);
         const data = await res.json();
 
         if (data.status === 'active') {
@@ -126,7 +127,7 @@ export default function EventPage() {
   const initiatePayment = async (qToken?: string) => {
     setIsProcessingPayment(true);
     try {
-      const res = await fetch('http://localhost:5000/api/checkout/intent', {
+      const res = await fetch(`${API_URL}/api/checkout/intent`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -178,7 +179,7 @@ export default function EventPage() {
     setIsProcessingPayment(true);
     try {
       // Simulate calling the Stripe success webhook on the backend
-      const res = await fetch('http://localhost:5000/api/checkout/confirm', {
+      const res = await fetch(`${API_URL}/api/checkout/confirm`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

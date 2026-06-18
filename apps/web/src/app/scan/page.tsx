@@ -5,6 +5,7 @@ import { useAuth } from '@/app/providers';
 import { useRouter } from 'next/navigation';
 import jsQR from 'jsqr';
 import { QrCode, Camera, Upload, AlertCircle, CheckCircle, XCircle, RefreshCw, Clipboard } from 'lucide-react';
+import { API_URL } from '@/config';
 
 interface ScanResult {
   valid: boolean;
@@ -157,7 +158,7 @@ export default function TicketScannerPage() {
     setResult(null);
 
     try {
-      const res = await fetch('http://localhost:5000/api/tickets/scan', {
+      const res = await fetch(`${API_URL}/api/tickets/scan`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

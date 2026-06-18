@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { API_URL } from '@/config';
 
 // Initialize React Query Client
 const queryClient = new QueryClient({
@@ -60,7 +61,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     localStorage.removeItem('gatepass_token');
     localStorage.removeItem('gatepass_user');
     // Clear HttpOnly cookie on backend
-    fetch('http://localhost:5000/api/auth/logout', { method: 'POST' }).catch(console.error);
+    fetch(`${API_URL}/api/auth/logout`, { method: 'POST' }).catch(console.error);
   };
 
   return (

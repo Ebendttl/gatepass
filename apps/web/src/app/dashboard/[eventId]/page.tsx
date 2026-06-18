@@ -17,6 +17,7 @@ import {
   Clock
 } from 'lucide-react';
 import Link from 'next/link';
+import { API_URL } from '@/config';
 
 // Recharts imports (with dynamic import fallback/safety check)
 import {
@@ -80,7 +81,7 @@ export default function AnalyticsDashboardPage() {
   const { data, isLoading, error, refetch } = useQuery<AnalyticsData>({
     queryKey: ['event-analytics', eventId, timeGroup],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/api/events/${eventId}/analytics?group=${timeGroup}`, {
+      const res = await fetch(`${API_URL}/api/events/${eventId}/analytics?group=${timeGroup}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!res.ok) throw new Error('Failed to fetch analytics');
