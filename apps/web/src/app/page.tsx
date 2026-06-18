@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { Calendar, MapPin, Search, ArrowRight, ShieldCheck, Zap, Activity } from 'lucide-react';
 import { useState } from 'react';
+import { API_URL } from '@/config';
 
 interface Event {
   id: string;
@@ -22,7 +23,7 @@ export default function Home() {
   const { data, isLoading, error } = useQuery<{ events: Event[] }>({
     queryKey: ['events'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:5000/api/events');
+      const res = await fetch(`${API_URL}/api/events`);
       if (!res.ok) throw new Error('Failed to fetch events');
       return res.json();
     },
