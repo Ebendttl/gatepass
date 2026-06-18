@@ -18,12 +18,7 @@ router.get('/', async (req, res) => {
     return res.json({ events: result.rows });
   } catch (error) {
     console.error('List events error:', error);
-    return res.status(500).json({ 
-      error: 'Failed to retrieve events', 
-      code: 'INTERNAL_SERVER_ERROR', 
-      message: error.message, 
-      stack: error.stack 
-    });
+    return res.status(500).json({ error: 'Failed to retrieve events', code: 'INTERNAL_SERVER_ERROR' });
   }
 });
 
