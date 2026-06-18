@@ -123,3 +123,5 @@ The `apps/api/src/seed.js` script clears the database and populates it with:
    Forced root hoisting of `react` and `react-dom` by adding them to the root `package.json` devDependencies and deleted the duplicate `/apps/web/package-lock.json` file. This prevents module resolution collisions between the root and workspaces during production builds.
 6. **Startup Auto-Migrations**:
    Configured the backend API (`apps/api/src/db.js`) to automatically read and execute `/db/migrations/01_init.up.sql` on startup, making the service database-independent and self-initializing on new cloud deploys.
+7. **Client API Endpoint Centralization**:
+   Replaced hardcoded `localhost:5000` URLs across all Next.js pages with a centralized config constant (`apps/web/src/config.ts`) backing `process.env.NEXT_PUBLIC_API_URL` to solve production connection failures.
