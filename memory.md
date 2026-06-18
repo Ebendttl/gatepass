@@ -121,3 +121,5 @@ The `apps/api/src/seed.js` script clears the database and populates it with:
    Upgraded Next.js and its dependencies to a secure patched version (`^15.1.12` resolving to `15.5.19`) to bypass Vercel's automated Remote Code Execution (RCE) security checks.
 5. **Monorepo Dependency Consolidation**:
    Forced root hoisting of `react` and `react-dom` by adding them to the root `package.json` devDependencies and deleted the duplicate `/apps/web/package-lock.json` file. This prevents module resolution collisions between the root and workspaces during production builds.
+6. **Startup Auto-Migrations**:
+   Configured the backend API (`apps/api/src/db.js`) to automatically read and execute `/db/migrations/01_init.up.sql` on startup, making the service database-independent and self-initializing on new cloud deploys.
